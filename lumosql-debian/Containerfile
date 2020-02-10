@@ -1,0 +1,10 @@
+# buildah -t lumosql-debian
+FROM debian:buster
+
+RUN true \
+  && sed -ni 'p;s/^deb /deb-src /p' /etc/apt/sources.list \
+  && apt-get update \
+  && apt-get upgrade --yes \
+  && apt-get install --yes git build-essential tcl \
+  && apt build-dep --yes sqlite3 \
+  && rm -rf "/var/lib/apt/lists/*"
