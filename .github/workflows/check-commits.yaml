@@ -1,0 +1,15 @@
+on:
+  push:
+    branches-ignore: [master, staging, trying]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    name: Fail on fixup commits
+    steps:
+      - uses: actions/checkout@v2
+      - name: Fetch all history so that later commands succeed
+        run: git fetch --prune --unshallow
+      - name: Fail if any commits have a subject line starting fixup!
+        run:
+          "! git log --pretty=format:%s%n origin/master..HEAD | grep -q ^fixup!"
