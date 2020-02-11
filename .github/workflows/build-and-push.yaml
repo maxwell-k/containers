@@ -4,13 +4,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build and push
-    env: { DOMAIN: docker.pkg.github.com }
+    env: { CONTAINER_REPO: quay.io/keith_maxwell/lumosql-build }
     steps:
       - uses: actions/checkout@v2
-      - name: Log into registry
-        run:
-          docker login $DOMAIN --username ${{ github.actor }} --password "${{
-          secrets.GITHUB_TOKEN }}"
+      - name: Log into the container repository
+        run: |
+          docker login  \
+            --username "${{ secrets.CONTAINER_REPO_USERNAME }}" \
+            --password "${{ secrets.CONTAINER_REPO_TOKEN }}" \
+            "${CONTAINER_REPO%%/*}"
       - name: Build all of the container images
         run: |
           for i in lumosql-build/* ; do
@@ -20,7 +22,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           for i in lumosql-build/* ; do
-            name="${{ env.DOMAIN }}/${{ github.repository }}/lumosql-build:${i##*/}"
+            name="$CONTAINER_REPO:${i##*/}"
             docker tag "$i" "$name"
             docker push "$name"
             name="$name-${{ github.sha }}"
