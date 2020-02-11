@@ -13,16 +13,17 @@ jobs:
           secrets.GITHUB_TOKEN }}"
       - name: Build all of the container images
         run: |
-          for i in lumosql-* ; do
+          for i in lumosql-build/* ; do
             docker build "$i" --file "$i/Containerfile" --tag "$i"
           done
       - name: Push the images
         if: github.ref == 'refs/heads/master'
-        env: { REPO: "${{ env.DOMAIN }}/${{ github.repository }}" }
         run: |
-          for i in lumosql-* ; do
-            docker tag "$i" "$REPO/$i:${{ github.sha }}"
-            docker tag "$i" "$REPO/$i:latest"
-            docker push "$REPO/$i:${{ github.sha }}"
-            docker push "$REPO/$i:latest"
+          for i in lumosql-build/* ; do
+            name="${{ env.DOMAIN }}/${{ github.repository }}/lumosql-build:${i##*/}"
+            docker tag "$i" "$name"
+            docker push "$name"
+            name="$name-${{ github.sha }}"
+            docker tag "$i" "$name"
+            docker push "$name"
           done
