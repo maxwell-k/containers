@@ -1,0 +1,6 @@
+status = [
+  "Build and push"
+]
+pr_status = [
+  "Check commits"
+]
