@@ -1,10 +1,9 @@
-name: Build Debian container
 on: { push: { branches: [master, staging, trying] } }
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: Build Debian container
+    name: Build and push
     env:
       DOMAIN: docker.pkg.github.com
     steps:
