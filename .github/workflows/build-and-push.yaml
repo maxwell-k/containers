@@ -4,24 +4,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build and push
-    env:
-      DOMAIN: docker.pkg.github.com
+    env: { DOMAIN: docker.pkg.github.com }
     steps:
       - uses: actions/checkout@v2
       - name: Log into registry
         run:
           docker login $DOMAIN --username ${{ github.actor }} --password "${{
           secrets.GITHUB_TOKEN }}"
-      - name: Build the Debian container image
-        run:
-          docker build lumosql-debian --file lumosql-debian/Containerfile --tag
-          lumosql-debian
-      - name: Push image
-        if: github.ref == 'refs/heads/master'
-        env:
-          REPO: ${{ env.DOMAIN }}/${{ github.repository }}
+      - name: Build all of the container images
         run: |
-          docker tag lumosql-debian "$REPO/lumosql-debian:${{ github.sha }}"
-          docker tag lumosql-debian "$REPO/lumosql-debian:latest"
-          docker push "$REPO/lumosql-debian:${{ github.sha }}"
-          docker push "$REPO/lumosql-debian:latest"
+          for i in lumosql-* ; do
+            docker build "$i" --file "$i/Containerfile" --tag "$i"
+          done
+      - name: Push the images
+        if: github.ref == 'refs/heads/master'
+        env: { REPO: "${{ env.DOMAIN }}/${{ github.repository }}" }
+        run: |
+          for i in lumosql-* ; do
+            docker tag "$i" "$REPO/$i:${{ github.sha }}"
+            docker tag "$i" "$REPO/$i:latest"
+            docker push "$REPO/$i:${{ github.sha }}"
+            docker push "$REPO/$i:latest"
+          done
