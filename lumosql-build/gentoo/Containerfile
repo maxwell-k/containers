@@ -1,0 +1,7 @@
+FROM gentoo/portage AS portage
+
+FROM gentoo/stage3-amd64
+COPY --from=portage /var/db/repos/gentoo /var/db/repos/gentoo
+RUN true \
+  && emerge -v dev-lang/tcl dev-vcs/git \
+  && rm -r /var/db/repos /var/cache/distfiles /var/log \
