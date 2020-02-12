@@ -1,4 +1,3 @@
-# buildah -t lumosql-fedora
 FROM fedora:31
 
 RUN true \

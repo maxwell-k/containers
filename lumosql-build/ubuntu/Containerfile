@@ -1,11 +1,10 @@
-# buildah -t lumosql-fedora
 FROM ubuntu:18.04
 
 RUN true \
   && apt-get update \
   && DEBIAN_FRONTEND=noninteractive apt-get install \
     --no-install-recommends --yes \
-    # discovered with apt-get build-dep
+    # discovered with apt-get build-dep:
     build-essential \
     debhelper \
     autoconf \
@@ -14,9 +13,9 @@ RUN true \
     chrpath \
     libreadline-dev \
     tcl8.6-dev \
-    # for cloning over https with git
+    # for cloning over https with git:
     git ca-certificates \
-    # for /usr/bin/tclsh
-    # tcl8.6-dev brings in tcl8.6 which only includes tclsh8.6
+    # for /usr/bin/tclsh:
+    # (tcl8.6-dev brings in tcl8.6 which only includes tclsh8.6)
     tcl \
   && rm -rf /var/lib/apt/lists/* \
