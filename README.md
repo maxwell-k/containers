@@ -39,6 +39,6 @@ All of the solutions that I looked at met this criteria. From <https://quay.io/p
 
 ---
 
-[![Bors enabled](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/23186)
+[![REUSE status](https://api.reuse.software/badge/github.com/maxwell-k/containers)](https://api.reuse.software/info/github.com/maxwell-k/containers) [![Bors enabled](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/23186)
 
 <!-- vim: set filetype=markdown.gfm : -->
