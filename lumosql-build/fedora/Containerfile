@@ -1,7 +1,7 @@
 FROM fedora:31
 
 RUN true \
-  && dnf --assumeyes update \
+  && dnf --assumeyes upgrade \
   && dnf install --assumeyes \
     git make gcc ncurses-devel readline-devel glibc-devel autoconf tcl-devel \
   && dnf clean all \
