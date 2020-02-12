@@ -4,7 +4,7 @@ This repository uses GitHub actions to build containers and publish them to [Qua
 
 The first set of containers are focussed on building [LumoSQL](https://github.com/LumoSQL/LumoSQL).
 
-## Why Quay.io?
+## Why Quay.io for hosting container images?
 
 Three reasons:
 
@@ -13,6 +13,10 @@ Three reasons:
 3. Available as a free service
 
 I used these criteria to rule out other alternatives including Docker Hub and GitHub packages.
+
+_Be careful if evaluating GitHub packages because at present container images cannot be deleted:_
+
+> Version deletion is currently unsupported for docker. For more on our deletion policy, see https://help.github.com/articles/about-github-package-registry/#deleting-a-package
 
 ### Underlying software is open source
 
@@ -37,8 +41,15 @@ All of the solutions that I looked at met this criteria. From <https://quay.io/p
 >
 > Yes! We offer unlimited storage and serving of public repositories. We strongly believe in the open source community and will do what we can to help!
 
+## Secrets
+
+To push container images to Quay.io the GitHub actions in this repository uses two secrets:
+
+- `CONTAINER_REPO_USERNAME`
+- `CONTAINER_REPO_TOKEN`
+
 ---
 
-[![REUSE status](https://api.reuse.software/badge/github.com/maxwell-k/containers)](https://api.reuse.software/info/github.com/maxwell-k/containers) [![Bors enabled](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/23186)
+[![REUSE status](https://api.reuse.software/badge/github.com/maxwell-k/containers)](https://api.reuse.software/info/github.com/maxwell-k/containers) [![Bors enabled](https://bors.tech/images/badge_small.svg)](https://app.bors.tech/repositories/23193)
 
 <!-- vim: set filetype=markdown.gfm : -->
