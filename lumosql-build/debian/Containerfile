@@ -1,4 +1,3 @@
-# buildah -t lumosql-debian
 FROM debian:buster
 
 RUN true \
