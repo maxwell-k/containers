@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 
 RUN true \
   && apt-get update \
+  && DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes \
   && DEBIAN_FRONTEND=noninteractive apt-get install \
     --no-install-recommends --yes \
     # discovered with apt-get build-dep:
