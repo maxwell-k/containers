@@ -43,7 +43,7 @@ All of the solutions that I looked at met this criteria. From <https://quay.io/p
 
 ## Secrets
 
-To push container images to Quay.io the GitHub actions in this repository uses two secrets:
+To push container images to Quay.io the GitHub actions workflow in this repository uses two secrets:
 
 - `CONTAINER_REPO_USERNAME`
 - `CONTAINER_REPO_TOKEN`
