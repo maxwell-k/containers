@@ -1,7 +1,7 @@
 #!/bin/sh
 if ! lsmod | grep -q '^v4l2loopback_dc' ; then
 	sudo podman run --privileged --rm droidcam \
-		modprobe v4l2loopback-dc width=1920 height=1080
+		modprobe v4l2loopback-dc width=1440 height=1080
 fi
 
 if [ -n "$DISPLAY" ] ; then
